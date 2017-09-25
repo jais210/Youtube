@@ -23,57 +23,6 @@ body {
 }
 
 
-/* /other styles */
-
-
-/* 
-a,
-a:link,
-a:hover {
-    text-decoration: none;
-}
-
-.search-ip {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-}
-
-.form-search {
-    border-radius: 0;
-    max-width: 600px;
-    min-width: 450px;
-}
-
-.btn-search {
-    border-radius: 0;
-    padding-right: 40px;
-    padding-left: 40px;
-}
-
-.img-logo {
-    height: 50px;
-    margin-top: -16px;
-}
-
-.mn-top {
-    background-color: #fff;
-    padding-top: 63px;
-    padding-bottom: 3px;
-    text-align: center;
-    font-size: 1.1em;
-}
-
-.mn-top a {
-    color: #666;
-    margin-left: 10px;
-    padding-bottom: 13px;
-}
-
-.mn-top a:hover {
-    border-bottom: 3px solid #cc181e;
-} */
-
-
 /* Toggle Styles */
 
 #wrapper {
