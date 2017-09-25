@@ -23,10 +23,10 @@ let app = {
             const imageUrl = video.snippet.thumbnails.default.url;
             const url = `https://www.youtube.com/embed/${video.id.videoId}`;
             return `
-                     <img class="media-object" src=${imageUrl} /> 
-                     <p> 
-                        <iframe class="embed-responsive-item" src=${url}> </iframe>
-                     </p>
+                     <div><img class="media-object" src=${imageUrl} /> 
+                     <p></div> 
+                        <div><iframe class="embed-responsive-item" src=${url}> </iframe>
+                     </p><div>
                `;
         });
     },
