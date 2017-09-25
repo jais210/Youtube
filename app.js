@@ -1,16 +1,20 @@
 "use strict";
 const API_KEY = "AIzaSyB6RQPxv-X6aojxx9IKh0Nc4twyqlMnitI";
-
+// Objeto que almacenará los datos obtenidos del input
 let app = {
     result: {
         videos: [],
         selectedVideo: null,
-        searchTerm: "iPhone X"
-    },
+        searchTerm: "",
 
+    },
+    // función que llamada al evento tiene que mostrar los videos relacionados con el valor del input
     init: function() {
         //app.videoSearch("iPhone");
-        app.youtubeSearch("iPhone X");
+        $("input").keypress(function() {
+            app.youtubeSearch($("input").val());
+        });
+        //   app.youtubeSearch("numb");
     },
     //<iframe className="embed-responsive-item" src={url}> </iframe>
     getVideoList: function(videos) {
