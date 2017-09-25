@@ -11,8 +11,9 @@ let app = {
     // función que llamada al evento tiene que mostrar los videos relacionados con el valor del input
     init: function() {
         //app.videoSearch("iPhone");
-        $("input").keypress(function() {
-            app.youtubeSearch($("input").val());
+        $("input").keypress(function(e) {
+            if (e.which == 13)
+                app.youtubeSearch($("input").val());
         });
         //   app.youtubeSearch("numb");
     },
