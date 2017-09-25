@@ -17,12 +17,12 @@ let app = {
         return videos.map((video, index) => {
             const imageUrl = video.snippet.thumbnails.default.url;
             const url = `https://www.youtube.com/embed/${video.id.videoId}`;
-            return `<li> 
+            return `
                      <img class="media-object" src=${imageUrl} /> 
                      <p> 
                         <iframe class="embed-responsive-item" src=${url}> </iframe>
                      </p>
-               </li>`;
+               `;
         });
     },
     youtubeSearch: function(searchTerm) {
@@ -50,7 +50,7 @@ let app = {
             };
             var list = app.getVideoList(app.result.videos);
             console.log("lis: ", list);
-            $("#root").append(list);
+            $("root").append(list);
         });
     }
 };
