@@ -22,12 +22,18 @@ let app = {
         return videos.map((video, index) => {
             const imageUrl = video.snippet.thumbnails.default.url;
             const url = `https://www.youtube.com/embed/${video.id.videoId}`;
-            return `
-                     <div><img class="media-object" src=${imageUrl} /> 
-                     <p></div> 
-                        <div><iframe class="embed-responsive-item" src=${url}> </iframe>
-                     </p><div>
-               `;
+            // return `
+            //          <div><img class="media-object" src=${imageUrl} /> 
+            //          <p></div> 
+            //             <div><iframe class="embed-responsive-item" src=${url}> </iframe>
+            //          </p><div>
+            //    `;
+            `<div class='row'>
+            <div class='col-sm-12'>                                                                           
+                  <img class="media-object" src='${imageUrl}' />                                        
+                  <h4>${titulo}</h4>
+            </div>
+        </div>`;
         });
     },
     youtubeSearch: function(searchTerm) {
