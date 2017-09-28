@@ -10,30 +10,25 @@ let app = {
     },
     // función que llamada al evento tiene que mostrar los videos relacionados con el valor del input
     init: function() {
-        //app.videoSearch("iPhone");
-        $("input").keypress(function(e) {
-            if (e.which == 13)
-                app.youtubeSearch($("input").val());
-        });
-        //   app.youtubeSearch("numb");
+        $('#buscarBTN').click(app.buscarBTN);
+        $('input').keypress(app.buscarBTN)
     },
-    //<iframe className="embed-responsive-item" src={url}> </iframe>
+    buscarBTN: (e) => {
+        console.log(e.which)
+        if ((e.keyCode || e.which) == 13 || (e.keyCode || e.which) == 1) {
+            app.youtubeSearch($("#buscar").val());
+        }
+
+    },
     getVideoList: function(videos) {
         return videos.map((video, index) => {
             const imageUrl = video.snippet.thumbnails.default.url;
             const url = `https://www.youtube.com/embed/${video.id.videoId}`;
-            // return `
-            //          <div><img class="media-object" src=${imageUrl} /> 
-            //          <p></div> 
-            //             <div><iframe class="embed-responsive-item" src=${url}> </iframe>
-            //          </p><div>
-            //    `;
-            `<div class='row'>
-            <div class='col-sm-12'>                                                                           
-                  <img class="media-object" src='${imageUrl}' />                                        
-                  <h4>${titulo}</h4>
-            </div>
-        </div>`;
+            return `<div><img class="media-object" src=${imageUrl} /></div>
+                        <p><div>
+                            <iframe class="embed-responsive-item" src=${url}> </iframe>
+                        <div></p>
+               `;
         });
     },
     youtubeSearch: function(searchTerm) {
@@ -48,7 +43,7 @@ let app = {
             };
             var list = app.getVideoList(app.result.videos);
             console.log("lis: ", list);
-            $("#root").append(list);
+            $("#root").html(list);
         });
     },
     videoSearch: function(searchTerm) {
