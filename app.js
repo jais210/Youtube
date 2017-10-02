@@ -1,5 +1,4 @@
 "use strict";
-
 const API_KEY = "AIzaSyB6RQPxv-X6aojxx9IKh0Nc4twyqlMnitI";
 // Objeto que almacenará los datos obtenidos del input
 let app = {
@@ -12,33 +11,31 @@ let app = {
     // función que llamada al evento tiene que mostrar los videos relacionados con el valor del input
     init: () => {
         $('#buscarBTN').click(app.buscarBTN);
-        $('input').keypress(app.buscarBTN);
+        $('input').keypress(app.buscarBTN)
     },
     buscarBTN: (e) => {
         console.log(e.which)
-        
         if ((e.keyCode || e.which) == 13 || (e.keyCode || e.which) == 1) {
-            event.preventDefault();
+            event.defaultPrevented();
             app.youtubeSearch($("#buscar").val());
         }
 
     },
-    getVideoList: (videos) => {
+    getVideoList: (videos)=> {
         return videos.map((video, index) => {
             const imageUrl = video.snippet.thumbnails.default.url;
-            
+            const url = `https://www.youtube.com/embed/${video.id.videoId}`;
             return `<div class="row">
-            <div id="bigVideo"></div>
-            <div class="col-md-4 text-right"><img class="media-object" src=${imageUrl} /></div>
+            <div class="col-md-8 embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src=${url}> </iframe></div>
+        <div>
+            <div class="col-md-4"><img class="media-object" src=${imageUrl} /></div>
                         
                `;
         });
     },
     // Me falta crear otra función para que se muestre un solo video, quitando el map
-    searchBigVideo: ()=>{
-
-    },
-    youtubeSearch: (searchTerm) =>{
+    youtubeSearch: (searchTerm)=> {
         console.log(searchTerm);
 
         YTSearch({ key: API_KEY, term: searchTerm }, data => {
@@ -67,4 +64,6 @@ let app = {
         });
     }
 };
+
+
 $(document).ready(app.init);
