@@ -12,12 +12,15 @@ let app = {
     },
     // función que llamada al evento tiene que mostrar los videos relacionados con el valor del input
     init: function() {
+       
         $('#buscarBTN').click(app.buscarBTN);
-        $('input').keypress(app.buscarBTN)
+        $('input').keypress(app.buscarBTN);
     },
     buscarBTN: (e) => {
         console.log(e.which)
+        
         if ((e.keyCode || e.which) == 13 || (e.keyCode || e.which) == 1) {
+            event.preventDefault();
             app.youtubeSearch($("#buscar").val());
         }
 
