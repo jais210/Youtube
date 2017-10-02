@@ -1,7 +1,7 @@
 "use strict";
 const API_KEY = "AIzaSyB6RQPxv-X6aojxx9IKh0Nc4twyqlMnitI";
 // Objeto que almacenará los datos obtenidos del input
-let app = {
+const app = {
     result: {
         videos: [],
         selectedVideo: null,
