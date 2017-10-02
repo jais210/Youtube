@@ -16,10 +16,9 @@ let app = {
     buscarBTN: (e) => {
         console.log(e.which)
         if ((e.keyCode || e.which) == 13 || (e.keyCode || e.which) == 1) {
-            event.defaultPrevented();
             app.youtubeSearch($("#buscar").val());
+            event.preventDefault();
         }
-
     },
     getVideoList: (videos)=> {
         return videos.map((video, index) => {
@@ -64,6 +63,4 @@ let app = {
         });
     }
 };
-
-
 $(document).ready(app.init);
