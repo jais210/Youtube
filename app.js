@@ -1,4 +1,8 @@
 "use strict";
+
+class Youtube{
+
+}
 const API_KEY = "AIzaSyB6RQPxv-X6aojxx9IKh0Nc4twyqlMnitI";
 // Objeto que almacenará los datos obtenidos del input
 const app = {
@@ -24,13 +28,16 @@ const app = {
         return videos.map((video, index) => {
             const imageUrl = video.snippet.thumbnails.default.url;
             const url = `https://www.youtube.com/embed/${video.id.videoId}`;
-            return `<div><img class="media-object" src=${imageUrl} /></div>
-                        <p><div>
-                            <iframe class="embed-responsive-item" src=${url}> </iframe>
-                        <div></p>
+            return `<div class="row">
+            <div class="col-md-8 embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src=${url}> </iframe></div>
+        <div>
+            <div class="col-md-4"><img class="media-object" src=${imageUrl} /></div>
+                        
                `;
         });
     },
+    // Me falta crear otra función para que se muestre un solo video, quitando el map
     youtubeSearch: function(searchTerm) {
         console.log(searchTerm);
 
@@ -60,5 +67,6 @@ const app = {
         });
     }
 };
+
 
 $(document).ready(app.init);
