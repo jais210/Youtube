@@ -9,7 +9,7 @@ let app = {
 
     },
     // función que llamada al evento tiene que mostrar los videos relacionados con el valor del input
-    init: function() {
+    init: () => {
         $('#buscarBTN').click(app.buscarBTN);
         $('input').keypress(app.buscarBTN)
     },
@@ -20,7 +20,7 @@ let app = {
         }
 
     },
-    getVideoList: function(videos) {
+    getVideoList: (videos) => {
         return videos.map((video, index) => {
             const imageUrl = video.snippet.thumbnails.default.url;
             const url = `https://www.youtube.com/embed/${video.id.videoId}`;
@@ -28,7 +28,7 @@ let app = {
             const channel = video.snippet.channelTitle;
             let div= $('<div>').addClass("row videos").html(`
             <div class="embed-responsive embed-responsive-16by9 col-md-6 col-sm-6">
-                <iframe class="embed-responsive-item" src=${url}> </iframe>
+                 <iframe class="embed-responsive-item" src=${url}> </iframe>
             </div>
             <div class="col-md-6 col-sm-6">                     
                   <img src=${imageUrl}>
@@ -40,10 +40,8 @@ let app = {
             
         });
     },
-
   
-    
-    youtubeSearch: function(searchTerm) {
+    youtubeSearch: (searchTerm)=> {
         console.log(searchTerm);
 
         YTSearch({ key: API_KEY, term: searchTerm }, data => {
@@ -58,7 +56,7 @@ let app = {
             $("#root").html(list);
         });
     },
-    videoSearch: function(searchTerm) {
+    videoSearch: (searchTerm) =>{
         jQuery.getJSON("list.json", data => {
             console.log("result", data.items);
             app.result = {
@@ -68,9 +66,11 @@ let app = {
             };
             var list = app.getVideoList(app.result.videos);
             console.log("lis: ", list);
-            $("root").append(list);
-        });
-    }
+            $("root").append(list);       
+        })
+}
 };
 
+
 $(document).ready(app.init);
+
