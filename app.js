@@ -5,35 +5,44 @@ let app = {
     result: {
         videos: [],
         selectedVideo: null,
-        searchTerm: "",
+        searchTerm: undefined
 
     },
     // función que llamada al evento tiene que mostrar los videos relacionados con el valor del input
     init: () => {
         $('#buscarBTN').click(app.buscarBTN);
-        $('input').keypress(app.buscarBTN)
+        $('input').keypress(app.buscarBTN);
+        
     },
     buscarBTN: (e) => {
         console.log(e.which)
         if ((e.keyCode || e.which) == 13 || (e.keyCode || e.which) == 1) {
+           
             app.youtubeSearch($("#buscar").val());
             event.preventDefault();
         }
+
     },
-    getVideoList: (videos)=> {
+    getVideoList: (videos) => {
         return videos.map((video, index) => {
             const imageUrl = video.snippet.thumbnails.default.url;
-            const url = `https://www.youtube.com/embed/${video.id.videoId}`;
-            return `<div class="row">
-            <div class="col-md-8 embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item" src=${url}> </iframe></div>
-        <div>
-            <div class="col-md-4"><img class="media-object" src=${imageUrl} /></div>
-                        
-               `;
+            const title = video.snippet.title;
+            const channel = video.snippet.channelTitle;
+            const descripcion = video.snippet.description;
+            return (`
+            <div class = "row"
+                <div class="col-sm-8">                     
+                  <img class= "media-object" src=${imageUrl}/>
+                  <h4>${title}</h4>
+                  <p>${channel}</p>
+                  <p>${descripcion}</p>                                      
+                </div>
+            </div>`);
+           
+            
         });
     },
-    // Me falta crear otra función para que se muestre un solo video, quitando el map
+  
     youtubeSearch: (searchTerm)=> {
         console.log(searchTerm);
 
@@ -44,23 +53,46 @@ let app = {
                 selectedVideo: data[0],
                 searchTerm: searchTerm
             };
-            var list = app.getVideoList(app.result.videos);
+            app.bigVideo(app.result.videos[0]);
+            let list = app.getVideoList(app.result.videos);
             console.log("lis: ", list);
-            $("#root").html(list);
+            $("#img").html(list);
+            $('img').click(app.playVideo);
+
         });
     },
-    videoSearch: (searchTerm)=> {
-        jQuery.getJSON("list.json", data => {
-            console.log("result", data.items);
-            app.result = {
-                videos: data.items,
-                selectedVideo: data.items[0],
-                searchTerm: searchTerm
-            };
-            var list = app.getVideoList(app.result.videos);
-            console.log("lis: ", list);
-            $("root").append(list);
+    bigVideo:(video)=>{
+        const descripcion = video.snippet.description;
+        const url = `https://www.youtube.com/embed/${video.id.videoId}`;
+        $('#vd').html(`<div class="embed-responsive embed-responsive-16by9" > 
+        <iframe class="embed-responsive-item" src=${url}> </iframe>
+        <p>${descripcion}</p>
+        </div>`)
+    },
+    playVideo:()=>{
+        let src = event.target.src 
+        let idx;
+        app.result.videos.map((elemento, i) => {
+            return (src == elemento.snippet.thumbnails.default.url) ? idx = i : '';
         });
-    }
-};
+        console.log(idx);
+        app.bigVideo(app.result.videos[idx]);
+    },
+//     videoSearch: (searchTerm) =>{
+//         jQuery.getJSON("list.json", data => {
+//             console.log("result", data.items);
+//             app.result = {
+//                 videos: data.items,
+//                 selectedVideo: data.items[0],
+//                 searchTerm: searchTerm
+//             };
+//             var list = app.getVideoList(app.result.videos);
+//             console.log("lis: ", list);
+//             $("bigVideo").append(list);       
+//         });
+// }
+      
+}
+
+
 $(document).ready(app.init);
