@@ -5,8 +5,12 @@ let app = {
     result: {
         videos: [],
         selectedVideo: null,
+<<<<<<< HEAD
+        searchTerm: "",
+=======
         searchTerm: undefined
 
+>>>>>>> 6ca27d5b221e3ff5ac4e653d608bc4de9c54b9d3
     },
     // función que llamada al evento tiene que mostrar los videos relacionados con el valor del input
     init: () => {
