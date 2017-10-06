@@ -6,7 +6,6 @@ let app = {
         videos: [],
         selectedVideo: null,
         searchTerm: "",
-
     },
     // función que llamada al evento tiene que mostrar los videos relacionados con el valor del input
     init: () => {
